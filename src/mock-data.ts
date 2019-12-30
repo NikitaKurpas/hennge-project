@@ -2,14 +2,16 @@ import { Email } from './types/common';
 
 const MOCK_DATA: Email[] = [
   {
+    id: '1',
     from: 'bob@example.com',
     to: ['jane@example.com'],
     timestamp: new Date(Date.now() - 1000 * 60),
     subject: '[HR-888] Notice of official announcement',
     body:
-      'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor.'
+      'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor. Adiurators mori in nobilis tornacum! Fermiums mori!, Victrixs credere in caelos! Eheu, devirginato! Accelerare tandem ducunt ad altus cannabis. Armariums prarere!'
   },
   {
+    id: '2',
     from: 'no_reply@example.com',
     to: ['bob@example.com', 'jeff@example.com'],
     timestamp: new Date(Date.now() - 1000 * 60 * 60),
@@ -18,6 +20,7 @@ const MOCK_DATA: Email[] = [
       'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor.'
   },
   {
+    id: '3',
     from: 'aaa@example.com',
     to: ['bbb@example.com', 'ccc@example.com', 'ddd@example.com', 'eee@example.com'],
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
@@ -30,6 +33,7 @@ const MOCK_DATA: Email[] = [
     ]
   },
   {
+    id: '4',
     from: 'xxx@example.com',
     to: ['yyy@example.com'],
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
@@ -39,6 +43,7 @@ const MOCK_DATA: Email[] = [
     attachments: [{ name: 'document.docx', uri: 'some-uri-here' }]
   },
   {
+    id: '5',
     from: 'Pablo-Diego-José-Francisco-Ruiz-Picasso',
     to: ['Pablo-Diego-José-Francisco-Ruiz-Picasso@example.com'],
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
@@ -48,6 +53,7 @@ const MOCK_DATA: Email[] = [
     attachments: [{ name: 'document.docx', uri: 'some-uri-here' }]
   },
   {
+    id: '6',
     from: 'nikitakurpas@gmail.com',
     to: ['nikita.kurpas@toptal.com'],
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
@@ -56,6 +62,7 @@ const MOCK_DATA: Email[] = [
       'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor.'
   },
   {
+    id: '7',
     from: 'a@b.c',
     to: ['b@b.c', 'c@b.c', 'd@b.c', 'e@b.c'],
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),

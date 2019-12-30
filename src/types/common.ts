@@ -1,4 +1,5 @@
 export type Email = {
+  id: string,
   from: string;
   to: string[];
   cc?: string[];
