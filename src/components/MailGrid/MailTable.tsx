@@ -1,11 +1,11 @@
-import React, { MouseEventHandler } from 'react';
+import React, {MouseEventHandler} from 'react';
 import 'styled-components/macro';
 import styled from 'styled-components';
-import { ReactComponent as ClipIconSVG } from '../../icons/icon_clip.svg';
-import { ReactComponent as OrderIconSVG } from '../../icons/icon_arrow01.svg';
-import { formatTimestamp, SortField, SortOrder } from '../MailGrid';
-import { Email } from '../../types/common';
+import {ReactComponent as OrderIconSVG} from '../../icons/icon_arrow01.svg';
+import {SortField, SortOrder} from '../MailGrid';
+import {Email} from '../../types/common';
 import theme from '../../lib/theme';
+import MailTableRow from "./MailTableRow";
 
 const Table = styled.table`
   table-layout: fixed;
@@ -73,47 +73,6 @@ const TimestampColumn = styled.col`
   width: calc(10ch + 16px);
 `;
 
-const Cell = styled.td<{ active?: boolean }>`
-  padding: 12px 8px;
-  font-size: 16px;
-  color: ${theme.colors.gray.dark};
-  font-weight: ${props => (props.active ? 'bold' : 'normal')};
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-`;
-
-const AttachmentIndicator = styled(ClipIconSVG)`
-  width: 1em;
-  height: 1em;
-`;
-
-const Row = styled.tr`
-  border-bottom: 1px solid ${theme.colors.lightGray.default};
-
-  &:hover {
-    background-color: ${theme.colors.lightGray.light};
-    cursor: pointer;
-
-    ${Cell}:not(:last-child) {
-      color: ${theme.colors.blue.default};
-    }
-
-    ${Cell} ${AttachmentIndicator} .a {
-      fill: ${theme.colors.blue.default};
-    }
-  }
-`;
-
-const Badge = styled.span`
-  font-size: 12px;
-  font-weight: bold;
-  padding: 1px 4px 2px 4px;
-  border-radius: 4px;
-  background-color: ${theme.colors.gray.light};
-  color: white;
-`;
-
 const MailTable: React.FC<{
   items: Email[];
   sort?: { field: SortField; order: SortOrder };
@@ -147,21 +106,9 @@ const MailTable: React.FC<{
       </tr>
     </TableHeader>
     <tbody>
-      {items.map(item => {
-        // const { text: recipientsText, additionalRecipients } = constructRecipientsMeta(item.to);
-        const recipientsText = item.to.length > 1 ? `${item.to[0]}, ...` : item.to[0];
-        const additionalRecipients = item.to.length > 1 ? item.to.length - 1 : 0;
-        return (
-          <Row>
-            <Cell active={sort?.field === 'from'}>{item.from}</Cell>
-            <Cell active={sort?.field === 'to'}>{recipientsText}</Cell>
-            <Cell>{additionalRecipients > 0 && <Badge>+{additionalRecipients}</Badge>}</Cell>
-            <Cell active={sort?.field === 'subject'}>{item.subject}</Cell>
-            <Cell>{item.attachments?.length && <AttachmentIndicator />}</Cell>
-            <Cell active={sort?.field === 'timestamp'}>{formatTimestamp(item.timestamp)}</Cell>
-          </Row>
-        );
-      })}
+      {items.map(item => (
+        <MailTableRow key={item.id} item={item} sort={sort} />
+      ))}
     </tbody>
   </Table>
 );

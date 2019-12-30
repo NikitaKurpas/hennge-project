@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'styled-components/macro';
 import { Email } from '../../types/common';
 import styled from 'styled-components';
@@ -7,9 +7,10 @@ import { ReactComponent as MailIconSVG } from '../../icons/icon_mail_sp.svg';
 import { ReactComponent as ClipIconSVG } from '../../icons/icon_clip.svg';
 import { ReactComponent as ArrowIconSVG } from '../../icons/icon_arrow02.svg';
 import { formatTimestamp } from '../MailGrid';
-import theme from "../../lib/theme";
+import theme from '../../lib/theme';
+import MailDetailView from './MailDetailView';
 
-const Container = styled.li`
+const ListItem = styled.li`
   display: flex;
   flex-direction: column;
   padding: 16px;
@@ -18,6 +19,11 @@ const Container = styled.li`
   && > * + * {
     margin-top: 12px;
   }
+`;
+
+const MailDetailListItem = styled.li`
+  padding: 8px 16px 0 16px;
+  border-bottom: 1px solid ${theme.colors.lightGray.default};
 `;
 
 const Subject = styled.p`
@@ -72,37 +78,47 @@ const ClipIcon = styled(ClipIconSVG)`
 `;
 
 const MailListItem: React.FC<{ item: Email }> = ({ item }) => {
+  const [isOpen, setOpen] = useState(false);
+
   const recipientsText = item.to.length > 2 ? `${item.to[0]}, ${item.to[1]}, ...` : item.to.join(', ');
   const additionalRecipients = item.to.length > 2 ? item.to.length - 2 : 0;
+
   return (
-    <Container>
-      <Stack spacing={8} crossAxis="center">
-        <MailIcon />
+    <>
+      <ListItem onClick={() => setOpen(!isOpen)}>
+        <Stack spacing={8} crossAxis="center">
+          <MailIcon />
 
-        <Stack
-          direction="column"
-          spacing={7}
-          css={`
-            flex: 1;
-            min-width: 0;
-          `}
-        >
-          <Stack spacing={8} crossAxis="center">
-            <From>{item.from}</From>
-            {item.attachments && <ClipIcon />}
-            <Date>{formatTimestamp(item.timestamp)}</Date>
-            <ArrowIcon />
-          </Stack>
+          <Stack
+            direction="column"
+            spacing={7}
+            css={`
+              flex: 1;
+              min-width: 0;
+            `}
+          >
+            <Stack spacing={8} crossAxis="center">
+              <From>{item.from}</From>
+              {item.attachments && <ClipIcon />}
+              <Date>{formatTimestamp(item.timestamp)}</Date>
+              <ArrowIcon />
+            </Stack>
 
-          <Stack crossAxis="center">
-            <To>{recipientsText}</To>
-            {additionalRecipients > 0 && <Badge>+{additionalRecipients}</Badge>}
+            <Stack crossAxis="center">
+              <To>{recipientsText}</To>
+              {additionalRecipients > 0 && <Badge>+{additionalRecipients}</Badge>}
+            </Stack>
           </Stack>
         </Stack>
-      </Stack>
 
-      <Subject>{item.subject}</Subject>
-    </Container>
+        <Subject>{item.subject}</Subject>
+      </ListItem>
+      {isOpen && (
+        <MailDetailListItem>
+          <MailDetailView key={item.id} item={item} />
+        </MailDetailListItem>
+      )}
+    </>
   );
 };
 
