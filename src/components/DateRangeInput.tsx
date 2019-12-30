@@ -3,15 +3,23 @@ import { ReactComponent as CalendarIconSVG } from '../icons/icon_calender.svg';
 import { ReactComponent as SearchIconSVG } from '../icons/icon_search.svg';
 import styled from 'styled-components';
 import InputGroup from './InputGroup';
+import theme from '../lib/theme';
 
 const CalendarIcon = styled(CalendarIconSVG)`
-  width: 20px;
-  height: 20px;
+  height: 1.2em;
+  padding: 0 8px 0 16px;
+  margin-top: -2px;
+  .a {
+    fill: ${theme.colors.gray.default};
+  }
 `;
 
 const SearchIcon = styled(SearchIconSVG)`
-  width: 1em;
   height: 1em;
+  padding: 0 12px;
+  .a {
+    fill: ${theme.colors.gray.default};
+  }
 `;
 
 const DateRangeInput: React.FC = () => {

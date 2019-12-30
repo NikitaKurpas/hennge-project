@@ -1,10 +1,16 @@
 import React, { ComponentProps, HTMLProps, ReactElement } from 'react';
 import styled from 'styled-components';
+import theme from "../lib/theme";
 
 const FormGroup = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: stretch;
   position: relative;
+  border-radius: 8px;
+  
+  &:focus-within {
+    box-shadow: 0 0 0 1px ${theme.colors.blue.default};
+  }
 `;
 
 const LeftAddon = styled.div`
@@ -14,8 +20,6 @@ const LeftAddon = styled.div`
   bottom: 0;
   width: 44px;
   display: flex;
-  padding-left: 16px;
-  padding-right: 8px;
   align-items: center;
   justify-content: center;
 `;
@@ -23,15 +27,19 @@ const LeftAddon = styled.div`
 const Input = styled.input`
   padding: 8px 24px 8px 44px;
   font-size: 16px;
-  border: 1px solid #d0d0d0;
+  color: ${theme.colors.gray.dark};
+  border: 1px solid ${theme.colors.lightGray.dark};
   border-radius: 8px 0 0 8px;
+  
+  &:focus {
+    outline: none;
+  }
 `;
 
 const RightAddon = styled.div`
-  background-color: #f5f5f5;
-  border: 1px solid #dedede;
+  background-color: ${theme.colors.lightGray.light};
+  border: 1px solid ${theme.colors.lightGray.default};
   border-radius: 0 8px 8px 0;
-  padding: 0 12px;
   display: flex;
   align-items: center;
   justify-content: center;
