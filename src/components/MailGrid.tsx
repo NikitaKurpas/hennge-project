@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { format, isToday, isYesterday } from 'date-fns';
 import 'styled-components/macro';
 import { Email } from '../types/common';
@@ -58,6 +58,27 @@ export const formatTimestamp = (date: Date): string => {
 //   };
 // };
 
+const valueRetriever = (email: Email, field: SortField) => {
+  switch (field) {
+    case 'from':
+      return email.from;
+    case 'to':
+      return email.to[0];
+    case 'subject':
+      return email.subject;
+    case 'timestamp':
+      return email.timestamp;
+  }
+};
+
+const sortEmails = (field: SortField, order: SortOrder) => (email1: Email, email2: Email) => {
+  return valueRetriever(email1, field) > valueRetriever(email2, field)
+    ? 1 * order
+    : valueRetriever(email1, field) < valueRetriever(email2, field)
+    ? -1 * order
+    : 0;
+};
+
 const MailGrid: React.FC<{ items: Email[] }> = ({ items }) => {
   const [sort, setSort] = useState<{ field: SortField; order: SortOrder }>({
     field: 'timestamp',
@@ -69,9 +90,9 @@ const MailGrid: React.FC<{ items: Email[] }> = ({ items }) => {
 
   const isDesktop = useMedia(`(min-width: ${breakpoints.mobile})`);
   return isDesktop ? (
-    <MailTable items={items} sort={sort} onSortChange={handleSortChange} />
+    <MailTable items={items.sort(sortEmails(sort.field, sort.order))} sort={sort} onSortChange={handleSortChange} />
   ) : (
-    <MailList items={items} sort={sort} onSortChange={handleSortChange} />
+    <MailList items={items.sort(sortEmails(sort.field, sort.order))} sort={sort} onSortChange={handleSortChange} />
   );
 };
 
