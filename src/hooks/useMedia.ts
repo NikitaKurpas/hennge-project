@@ -6,8 +6,8 @@ const useMedia = (query: string) => {
 
   useEffect(() => {
     const handler = () => setMatches(mql.matches);
-    mql.addEventListener('change', handler);
-    return () => mql.removeEventListener('change', handler);
+    mql.addListener(handler);
+    return () => mql.removeListener(handler);
   }, []);
 
   return matches;
