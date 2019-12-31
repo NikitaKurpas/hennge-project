@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'styled-components/macro';
 import Container from './components/Container';
 import DateRangeInput from './components/DateRangeInput';
@@ -7,7 +7,8 @@ import MailGrid from './components/MailGrid';
 import styled from 'styled-components';
 import MOCK_DATA from './mock-data';
 import breakpoints from './lib/breakpoints';
-import theme from "./lib/theme";
+import theme from './lib/theme';
+import { addDays, startOfDay, endOfDay, isWithinInterval } from 'date-fns';
 
 const ResultsText = styled.h1`
   margin: 16px 0 0;
@@ -32,6 +33,19 @@ const LogoContainer = styled.div`
 `;
 
 const App: React.FC = () => {
+  const [intervalStartDate, setIntervalStartDate] = useState<Date | null>(addDays(startOfDay(new Date()), -1));
+  const [intervalEndDate, setIntervalEndDate] = useState<Date | null>(addDays(endOfDay(new Date()), 1));
+
+  const [filteredItems, setFilteredItems] = useState(MOCK_DATA);
+
+  useEffect(() => {
+    if (intervalStartDate != null && intervalEndDate != null) {
+      setFilteredItems(
+        MOCK_DATA.filter(item => isWithinInterval(item.timestamp, { start: intervalStartDate, end: intervalEndDate }))
+      );
+    }
+  }, [intervalStartDate, intervalEndDate]);
+
   return (
     <Container>
       <section
@@ -43,20 +57,25 @@ const App: React.FC = () => {
           }
         `}
       >
-        <DateRangeInput />
+        <DateRangeInput
+          intervalStartDate={intervalStartDate}
+          intervalEndDate={intervalEndDate}
+          onIntervalStartChange={date => setIntervalStartDate(date)}
+          onIntervalEndChange={date => setIntervalEndDate(date)}
+        />
 
         <ResultsText>
-          Results: <ResultsCounter>{MOCK_DATA.length}</ResultsCounter> mail(s)
+          Results: <ResultsCounter>{filteredItems.length}</ResultsCounter> mail(s)
         </ResultsText>
       </section>
 
-      {!MOCK_DATA.length && (
+      {!filteredItems.length && (
         <LogoContainer>
           <img src={logo} alt="Logo" />
         </LogoContainer>
       )}
 
-      {MOCK_DATA.length && <MailGrid items={MOCK_DATA} />}
+      <MailGrid items={filteredItems} />
     </Container>
   );
 };

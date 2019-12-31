@@ -30,6 +30,7 @@ const Input = styled.input`
   color: ${theme.colors.gray.dark};
   border: 1px solid ${theme.colors.lightGray.dark};
   border-radius: 8px 0 0 8px;
+  width: calc(18ch + 24px + 44px);
   
   &:focus {
     outline: none;

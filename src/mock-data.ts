@@ -17,7 +17,7 @@ const MOCK_DATA: Email[] = [
     timestamp: new Date(Date.now() - 1000 * 60 * 60),
     subject: 'Deployment successful',
     body:
-      'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor.'
+      'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor. Hydras credere!, Luna studeres, tanquam fidelis exemplar., Cum racana resistere, omnes elogiumes magicae albus, clemens menses., Nunquam carpseris devatio., Domesticus vigils ducunt ad hilotae., Agripeta talis orexis est.'
   },
   {
     id: '3',
@@ -46,17 +46,17 @@ const MOCK_DATA: Email[] = [
     id: '5',
     from: 'Pablo-Diego-José-Francisco-Ruiz-Picasso',
     to: ['Pablo-Diego-José-Francisco-Ruiz-Picasso@example.com'],
-    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
+    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
     subject: 'Bi-color sensorem vix talems acipenser est.',
     body:
-      'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor.',
+      'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor., Ubi est bassus glos?, Hercle, nixus raptus!, audax ionicis tormento! Adiurators prarere! Racana albus stella est. Sunt bursaes fallere primus, magnum gloses.',
     attachments: [{ name: 'document.docx', uri: 'some-uri-here' }]
   },
   {
     id: '6',
     from: 'nikitakurpas@gmail.com',
     to: ['nikita.kurpas@toptal.com'],
-    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
+    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
     subject: 'Lura fidelis gabalium est.',
     body:
       'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor.'
@@ -65,7 +65,7 @@ const MOCK_DATA: Email[] = [
     id: '7',
     from: 'a@b.c',
     to: ['b@b.c', 'c@b.c', 'd@b.c', 'e@b.c'],
-    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
+    timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 15),
     subject: 'Lura fidelis gabalium est.',
     body:
       'Solitudos cantare in azureus revalia! Pol, a bene tabes, fluctus! Fortis, azureus fraticinidas interdum talem de flavum, barbatus decor.'

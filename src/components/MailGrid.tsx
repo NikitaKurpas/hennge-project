@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { format, isToday, isYesterday } from 'date-fns';
 import 'styled-components/macro';
 import { Email } from '../types/common';
@@ -6,6 +6,8 @@ import MailTable from './MailGrid/MailTable';
 import MailList from './MailGrid/MailList';
 import useMedia from '../hooks/useMedia';
 import breakpoints from '../lib/breakpoints';
+import styled from 'styled-components';
+import theme from '../lib/theme';
 
 export type SortField = 'from' | 'to' | 'subject' | 'timestamp';
 export type SortOrder = 1 | -1;
@@ -79,16 +81,26 @@ const sortEmails = (field: SortField, order: SortOrder) => (email1: Email, email
     : 0;
 };
 
+const Divider = styled.div`
+  height: 0;
+  width: 100%;
+  border-top: 1px solid ${theme.colors.lightGray.default};
+`;
+
 const MailGrid: React.FC<{ items: Email[] }> = ({ items }) => {
   const [sort, setSort] = useState<{ field: SortField; order: SortOrder }>({
     field: 'timestamp',
     order: -1
   });
+  const isDesktop = useMedia(`(min-width: ${breakpoints.mobile})`);
 
   const handleSortChange = (field: SortField) =>
     sort.field === field ? setSort({ field, order: (sort.order * -1) as SortOrder }) : setSort({ field, order: 1 });
 
-  const isDesktop = useMedia(`(min-width: ${breakpoints.mobile})`);
+  if (!items.length) {
+    return <Divider />;
+  }
+
   return isDesktop ? (
     <MailTable items={items.sort(sortEmails(sort.field, sort.order))} sort={sort} onSortChange={handleSortChange} />
   ) : (
