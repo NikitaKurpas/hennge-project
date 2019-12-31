@@ -1,3 +1,13 @@
+# HENNGE assinment project
+
+Desktop:
+
+<img width="1058" alt="Screenshot 2019-12-31 at 02 12 19" src="https://user-images.githubusercontent.com/2844046/71606648-12828b00-2b73-11ea-9b48-266b76c2787d.png">
+
+Mobile: 
+
+<img width="354" alt="Screenshot 2019-12-31 at 02 12 31" src="https://user-images.githubusercontent.com/2844046/71606647-10b8c780-2b73-11ea-9743-0fd75c1f3578.png">
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
