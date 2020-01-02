@@ -106,14 +106,14 @@ const Calendar: React.FC<{
 
   const blanks = [];
   for (let i = 1; i < getISODay(currentStartDate); i++) {
-    blanks.push(<td />);
+    blanks.push(<td key={`blank-${i}`} />);
   }
 
   const allDays = [];
   for (let day = 1; day <= getDaysInMonth(currentStartDate); day++) {
     const date = addDays(currentStartDate, day - 1);
     allDays.push(
-      <DayCell key={day} onClick={handleIntervalDaySelect(date)} selected={isDateSelected(date)}>
+      <DayCell key={`day-${day}`} onClick={handleIntervalDaySelect(date)} selected={isDateSelected(date)}>
         {day}
       </DayCell>
     );
@@ -172,8 +172,8 @@ const Calendar: React.FC<{
           </tr>
         </thead>
         <tbody>
-          {rows.map(days => (
-            <tr>{days}</tr>
+          {rows.map((days, idx) => (
+            <tr key={idx}>{days}</tr>
           ))}
         </tbody>
       </table>

@@ -83,7 +83,7 @@ const MailList: React.FC<{
     </ListHeader>
     <List>
       {items.map(item => (
-        <MailListItem item={item} />
+        <MailListItem key={item.id} item={item} />
       ))}
     </List>
   </>

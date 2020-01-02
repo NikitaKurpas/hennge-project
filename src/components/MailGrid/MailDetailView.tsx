@@ -54,43 +54,45 @@ const AttachmentIndicator = styled(ClipIconSVG)`
 
 const MailDetailView: React.FC<{ item: Email }> = ({ item }) => (
   <Table>
-    <Row>
-      <HeaderCell>From</HeaderCell>
-      <FromCell>{item.from}</FromCell>
-    </Row>
-    <Row>
-      <HeaderCell>To</HeaderCell>
-      <ValueCell>{item.to.join(', ')}</ValueCell>
-    </Row>
-    <Row>
-      <HeaderCell>Cc</HeaderCell>
-      <ValueCell>{item.cc?.join(', ')}</ValueCell>
-    </Row>
-    <Row>
-      <HeaderCell>Bcc</HeaderCell>
-      <ValueCell>{item.cc?.join(', ')}</ValueCell>
-    </Row>
-    <Row>
-      <HeaderCell>Subject</HeaderCell>
-      <ValueCell>{item.subject}</ValueCell>
-    </Row>
-    {item.attachments?.length && (
+    <tbody>
       <Row>
-        <HeaderCell>Attachments</HeaderCell>
-        <AttachmentCell>
-          {item.attachments?.map(attachment => (
-            <AttachmentLink href={attachment.uri} download={attachment.name}>
-              <AttachmentIndicator /> {attachment.name}
-            </AttachmentLink>
-          ))}
-        </AttachmentCell>
+        <HeaderCell>From</HeaderCell>
+        <FromCell>{item.from}</FromCell>
       </Row>
-    )}
-    <tr>
-      <ValueCell colSpan={2}>
-        <p>{item.body}</p>
-      </ValueCell>
-    </tr>
+      <Row>
+        <HeaderCell>To</HeaderCell>
+        <ValueCell>{item.to.join(', ')}</ValueCell>
+      </Row>
+      <Row>
+        <HeaderCell>Cc</HeaderCell>
+        <ValueCell>{item.cc?.join(', ')}</ValueCell>
+      </Row>
+      <Row>
+        <HeaderCell>Bcc</HeaderCell>
+        <ValueCell>{item.cc?.join(', ')}</ValueCell>
+      </Row>
+      <Row>
+        <HeaderCell>Subject</HeaderCell>
+        <ValueCell>{item.subject}</ValueCell>
+      </Row>
+      {item.attachments?.length && (
+        <Row>
+          <HeaderCell>Attachments</HeaderCell>
+          <AttachmentCell>
+            {item.attachments?.map(attachment => (
+              <AttachmentLink key={attachment.name} href={attachment.uri} download={attachment.name}>
+                <AttachmentIndicator /> {attachment.name}
+              </AttachmentLink>
+            ))}
+          </AttachmentCell>
+        </Row>
+      )}
+      <tr>
+        <ValueCell colSpan={2}>
+          <p>{item.body}</p>
+        </ValueCell>
+      </tr>
+    </tbody>
   </Table>
 );
 
