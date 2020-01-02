@@ -15,6 +15,9 @@ Mobile:
 ## Suggested improvements
 [Here](SUGGESTED_IMPROVEMENTS.md)
 
+## Efforts report
+[Here](EFFORTS.md)
+
 ## Available Scripts
 
 In the project directory, you can run:
