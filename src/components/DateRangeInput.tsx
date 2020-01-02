@@ -64,6 +64,7 @@ const DateRangeInput: React.FC<{
         inputProps={{
           type: 'text',
           onFocus: () => setCalendarShown(true),
+          readOnly: true,
           value:
             intervalStartDate && intervalEndDate
               ? `${lightFormat(intervalStartDate, 'yyyy/M/d')} - ${lightFormat(intervalEndDate, 'yyyy/M/d')}`
